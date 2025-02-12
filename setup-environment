@@ -167,6 +167,7 @@ if [ "$build_dir_setup_enabled" = "true" ]; then
     cat >> conf/local.conf <<EOF
 
 DL_DIR ?= "\${BSPDIR}/downloads/"
+ACCEPT_FSL_EULA = "1"
 EOF
     # Change settings according environment
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
