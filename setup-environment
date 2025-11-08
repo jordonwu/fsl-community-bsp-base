@@ -166,7 +166,17 @@ if [ "$build_dir_setup_enabled" = "true" ]; then
     grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
     cat >> conf/local.conf <<EOF
 
-DL_DIR ?= "\${BSPDIR}/downloads/"
+#DL_DIR ?= "\${BSPDIR}/downloads/"
+DL_DIR="\${BSPDIR}/../yocto_dl"
+SSTATE_DIR="\${BSPDIR}/../yocto_sstate-cache"
+
+INHERIT += "rm_work"
+RM_WORK_EXCLUDE += "u-boot-imx"
+RM_WORK_EXCLUDE += "linux-imx"
+
+BB_NUMBER_THREADS = "8"
+PARALLEL_MAKE = "-j 8"
+
 EOF
     # Change settings according environment
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
